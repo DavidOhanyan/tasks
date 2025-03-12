@@ -1,0 +1,26 @@
+name: Delayed Hello World
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  delayed-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Sozdat' skript
+        run: |
+          echo -e '#!/bin/bash\necho "Hello, world!"' > delayed_hello.sh
+          chmod +x delayed_hello.sh
+
+      - name: Install at (if not installed)
+        run: sudo apt-get install -y at
+
+      - name: Zapustit' skript s zaderzhkoy
+        run: |
+          echo "./delayed_hello.sh" | at now + 1 minutes
