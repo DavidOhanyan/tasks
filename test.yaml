@@ -1,9 +1,12 @@
 name: Delayed Hello World
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      my_param:
+        description: "Какой-то параметр"
+        required: true
+        type: string
 
 jobs:
   delayed-hello:
@@ -13,14 +16,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Sozdat' skript
-        run: |
-          echo -e '#!/bin/bash\necho "Hello, world!"' > delayed_hello.sh
-          chmod +x delayed_hello.sh
-
-      - name: Install at (if not installed)
-        run: sudo apt-get install -y at
-
-      - name: Zapustit' skript s zaderzhkoy
-        run: |
-          echo "./delayed_hello.sh" 
+      - name: vot nasha versya ${{ github.event.inputs.my_param }}
