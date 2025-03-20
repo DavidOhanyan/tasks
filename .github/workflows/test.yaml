@@ -19,4 +19,3 @@ jobs:
       - name: dsda
         run: | 
           echo vot nasha versya ${{ github.event.inputs.my_param }}
-          cat file
