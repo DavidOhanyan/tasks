@@ -3,7 +3,7 @@ name: Delayed Hello World
 on:
   workflow_dispatch:
     inputs:
-      my_param:
+      version:
         description: "Какой-то параметр"
         required: true
         type: string
