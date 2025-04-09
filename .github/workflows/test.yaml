@@ -16,5 +16,5 @@ jobs:
     steps:
       - name: Extract repo name only
         run: |
-          REPO_NAME=${GITHUB_REPOSITORY##*/}
-          echo "Repo name: $REPO_NAME"
+          echo ${{ github.event.inputs.version }}
+          echo '${{ github.event.inputs.version }}'
