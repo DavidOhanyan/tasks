@@ -11,8 +11,8 @@ on:
 
 
 jobs:
-  show-repo-name:
+  extract-repo-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Print repo name
+      - name: Extract repo name only
         run: echo "Repo name: ${GITHUB_REPOSITORY##*/}"
