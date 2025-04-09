@@ -15,4 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Extract repo name only
-        run: echo "Repo name: ${GITHUB_REPOSITORY##*/}"
+        run: |
+          REPO_NAME=${GITHUB_REPOSITORY##*/}
+          echo "Repo name: $REPO_NAME"
