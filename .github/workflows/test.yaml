@@ -8,14 +8,11 @@ on:
         required: true
         type: string
 
+
+
 jobs:
-  delayed-hello:
+  show-repo-name:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: dsda
-        run: | 
-          echo vot nasha versya ${{ github.event.inputs.version }}
+      - name: Print repo name
+        run: echo "Repository name is $GITHUB_REPOSITORY"
