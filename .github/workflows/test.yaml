@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print repo name
-        run: echo "Repository name is $GITHUB_REPOSITORY"
+        run: echo "Repo name: ${GITHUB_REPOSITORY##*/}"
