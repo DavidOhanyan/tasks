@@ -4,9 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Какой-то параметр"
+        description: 'Version to deploy'
         required: true
         type: string
+        default: 0
+
+      silent:
+        description: 'Отправить сообщение без звука?'
+        required: true
+        type: choice
+        default: "true"
+        options:
+          - "true"
+          - "false"
+
 
 
 
