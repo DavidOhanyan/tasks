@@ -21,16 +21,15 @@ env:
     TRIGGERED_BY: ${{ github.event.inputs.initiator }}
 
 jobs:
-  extract-and-use:
+  deploy-prod:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'  # Не выполнять для ветки 'main'
 
     steps:
-      - name: Get number from branch name and export to GITHUB_ENV
-        run: |
-          NUMBER=$(echo "${GITHUB_REF_NAME}" | grep -o '[0-9]\+')
-          echo "CLEAN_VERSION=$NUMBER" >> $GITHUB_ENV
+      - name: Checkout the code from repo
+        uses: actions/checkout@v2
 
-      - name: Use extracted number
+      - name: Run deployment scripts
         run: |
-          echo "Clean version is: ${{ env.CLEAN_VERSION }}"
+          echo "Running deployment steps..."
 
