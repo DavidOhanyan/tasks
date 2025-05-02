@@ -10,7 +10,7 @@ on:
         default: 0
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.ref_name }}
 
 env:
     BUILD_BRANCH: ${{ github.ref }}
