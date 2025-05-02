@@ -1,4 +1,4 @@
-name: Delayed Hello World
+name: PROD.DEPLOY
 
 on:
   workflow_dispatch:
@@ -9,23 +9,21 @@ on:
         type: string
         default: 0
 
-      silent:
-        description: 'Отправить сообщение без звука?'
-        required: true
-        type: choice
-        default: "true"
-        options:
-          - "true"
-          - "false"
+concurrency:
+  group: ${{ github.ref }}
 
-
-
+env:
+    BUILD_BRANCH: ${{ github.ref }}
+    REPO_URL: europe-central2-docker.pkg.dev/keyprofi/avitrage/emaki_api
+    APP_VERSION: ${{ github.event.inputs.version }}
+    HELM_CHART_NAME: emaki-api-prod-chart-${{ github.event.inputs.version }}
+    NAMESPACE: emaki-api
+    TRIGGERED_BY: ${{ github.event.inputs.initiator }}
 
 jobs:
-  extract-repo-name:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Extract repo name only
-        run: |
-          echo ${{ github.event.inputs.version }}
-          echo '${{ github.event.inputs.version }}'
+    deploy-prod:
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Checkout the code from repo
+          run: |
+            echo "${{ BUILD_BRANCH }}" 
