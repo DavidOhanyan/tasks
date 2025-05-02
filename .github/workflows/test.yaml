@@ -21,9 +21,14 @@ env:
     TRIGGERED_BY: ${{ github.event.inputs.initiator }}
 
 jobs:
-    deploy-prod:
-      runs-on: ubuntu-22.04
-      steps:
-        - name: Checkout the code from repo
-          run: |
-              echo "${GITHUB_REF_NAME}"
+  extract-and-use:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get number from branch name and export to GITHUB_ENV
+        run: |
+          NUMBER=$(echo "${GITHUB_REF_NAME}" | grep -o '[0-9]\+')
+          echo "CLEAN_VERSION=$NUMBER" >> $GITHUB_ENV
+
+      - name: Use extracted number
+        run: echo "Clean version is: $CLEAN_VERSION"
