@@ -31,4 +31,6 @@ jobs:
           echo "CLEAN_VERSION=$NUMBER" >> $GITHUB_ENV
 
       - name: Use extracted number
-        run: echo "Clean version is: $CLEAN_VERSION"
+        run: |
+          echo "Clean version is: ${{ env.CLEAN_VERSION }}"
+
