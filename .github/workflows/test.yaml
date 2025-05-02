@@ -26,4 +26,5 @@ jobs:
       steps:
         - name: Checkout the code from repo
           run: |
-            echo "${{ BUILD_BRANCH }}" 
+            BUILD_BRANCH="${{ github.ref }}"
+            echo "Build branch: $BUILD_BRANCH"
