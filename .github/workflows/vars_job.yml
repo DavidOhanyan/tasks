@@ -1,0 +1,26 @@
+name: Demo outputs between jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  set_vars:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.setver.outputs.version }}
+      env_name: ${{ steps.setver.outputs.env_name }}
+    steps:
+      - name: Установить переменные
+        id: setver
+        run: |
+          echo "version=1.2.3" >> $GITHUB_OUTPUT
+          echo "env_name=prod" >> $GITHUB_OUTPUT
+
+  use_vars:
+    runs-on: ubuntu-latest
+    needs: set_vars
+    steps:
+      - name: Использовать переданные переменные
+        run: |
+          echo "Версия: ${{ needs.set_vars.outputs.version }}"
+          echo "Окружение: ${{ needs.set_vars.outputs.env_name }}"
