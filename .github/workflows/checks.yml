@@ -31,5 +31,10 @@ jobs:
                           -H "X-GitHub-Api-Version: 2022-11-28" \
                           "https://api.github.com/repos/${{ github.repository }}/pulls?head=DavidOhanyan:APT-${{ env.VERSION }}&state=open" | jq 'length')
 
-          echo "count of pr$OPEN_PR_COUNT"
+          echo "count of pr $OPEN_PR_COUNT"
           echo "branch version APT-${{ env.VERSION }}"
+          
+          if [ "$PR_COUNT" -gt 0 ]; then
+            echo "Ошибка: Есть открытые PR!"
+            exit 1
+          fi
