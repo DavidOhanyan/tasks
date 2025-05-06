@@ -21,15 +21,10 @@ env:
     TRIGGERED_BY: ${{ github.event.inputs.initiator }}
 
 jobs:
-  deploy-prod:
+  show-ref:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'  # Не выполнять для ветки 'main'
-
     steps:
-      - name: Checkout the code from repo
-        uses: actions/checkout@v2
+      - name: Показать github.ref
+        run: echo "Текущее значение github.ref ${{ github.ref }}
 
-      - name: Run deployment scripts
-        run: |
-          echo "Running deployment steps..."
 
