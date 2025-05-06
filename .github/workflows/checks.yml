@@ -36,5 +36,6 @@ jobs:
           
           if [ "$OPEN_PR_COUNT" -gt 0 ]; then
             echo "Ошибка: Есть открытые PR!"
+            echo "Смотри детали workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             exit 1
           fi
