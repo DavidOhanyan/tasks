@@ -34,7 +34,7 @@ jobs:
           echo "count of pr $OPEN_PR_COUNT"
           echo "branch version APT-${{ env.VERSION }}"
           
-          if [ "$PR_COUNT" -gt 0 ]; then
+          if [ "$OPEN_PR_COUNT" -gt 0 ]; then
             echo "Ошибка: Есть открытые PR!"
             exit 1
           fi
