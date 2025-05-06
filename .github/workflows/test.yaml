@@ -27,4 +27,4 @@ jobs:
       - name: Получить версию
         run: |
           echo "VERSION=$(echo '${{ github.ref }}' | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')" >> $GITHUB_ENV
-
+          echo "${{ env.VERSION }}"
