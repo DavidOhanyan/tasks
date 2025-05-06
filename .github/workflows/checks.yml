@@ -1,0 +1,34 @@
+name: demo checks
+
+on:
+  workflow_dispatch:
+    # inputs:
+    #   version:
+    #     description: 'Version to deploy'
+    #     required: true
+    #     type: string
+    #     default: 0
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set version from Git reference
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Сохраняем VERSION в GITHUB_ENV
+
+      - name: count pr
+        run: |
+          OPEN_PR_COUNT=$(curl -L -H "Accept: application/vnd.github+json" \
+                          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                          -H "X-GitHub-Api-Version: 2022-11-28" \
+                          "https://api.github.com/repos/${{ github.repository }}/pulls?head=DavidOhanyan:APT-${{ env.VERSION }}&state=open" | jq 'length')
+
+          echo "$OPEN_PR_COUNT"
