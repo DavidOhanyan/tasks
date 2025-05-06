@@ -25,6 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Показать github.ref
-        run: echo "Текущее значение github.ref ${{ github.ref }}
+        run: echo "Текущее значение github.ref ${{ github.ref }}"
 
 
