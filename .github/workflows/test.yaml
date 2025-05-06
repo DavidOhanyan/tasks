@@ -2,12 +2,12 @@ name: PROD.DEPLOY
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to deploy'
-        required: true
-        type: string
-        default: 0
+    # inputs:
+    #   version:
+    #     description: 'Version to deploy'
+    #     required: true
+    #     type: string
+    #     default: 0
 
 concurrency:
   group: ${{ github.ref_name }}
@@ -21,10 +21,19 @@ env:
     TRIGGERED_BY: ${{ github.event.inputs.initiator }}
 
 jobs:
-  show-ref:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Получить версию
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set version from Git reference
         run: |
-          echo "VERSION=$(echo '${{ github.ref }}' | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')" >> $GITHUB_ENV
-          echo "${{ env.VERSION }}"
+          VERSION=$(echo "${{ github.ref }}" | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Сохраняем VERSION в GITHUB_ENV
+
+      - name: Output version using env
+        run: |
+          echo "Текущая версия: ${{ env.VERSION }}"  # Выводим VERSION через env
+
