@@ -24,7 +24,7 @@ jobs:
   show-ref:
     runs-on: ubuntu-latest
     steps:
-      - name: Показать github.ref
-        run: echo "Текущее значение github.ref ${{ github.ref }}"
-
+      - name: Получить версию
+        run: |
+          echo "VERSION=$(echo '${{ github.ref }}' | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')" >> $GITHUB_ENV
 
