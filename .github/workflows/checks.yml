@@ -23,7 +23,7 @@ jobs:
         run: |
           VERSION=$(echo "${{ github.ref_name }}" | sed -E 's#[^-]*-##')
           echo "APP_VERSION=${VERSION}" >> $GITHUB_ENV  # Сохраняем VERSION в GITHUB_ENV
-          echo "anun@ = $APP_VERSION"
+          echo "anun@ = $VERSION"
 
       # - name: count pr
       #   run: |
