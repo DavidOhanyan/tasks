@@ -21,9 +21,9 @@ jobs:
 
       - name: Set version from Git reference
         run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -E 's#refs/tags/##; s#refs/heads/[^-]*-##')
+          VERSION=$(echo "${{ github.ref }}" | sed -E 's#[^-]*-##')
           echo "VERSION=${VERSION}" >> $GITHUB_ENV  # Сохраняем VERSION в GITHUB_ENV
-          echo "anun@ = ${{ github.ref_name }}"
+          echo "anun@ = $VERSION"
 
       # - name: count pr
       #   run: |
